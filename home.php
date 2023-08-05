@@ -105,7 +105,7 @@ if(isset($_GET['company_id'])){
 
       <div class="content">
          <h3>about us</h3>
-         <p>We are a student of CSE471 Group 12</p>
+         <p>We are a student of CSE470 Group 8</p>
       </div>
 
    </div>
