@@ -13,7 +13,7 @@ if($account_type != 'job_seeker'){
 
 
 if (isset($_GET['job_seeker_id'])) {
-    header('Location: /cse470_job_listing/company_message_details.php');
+    header('Location: /cse471_job_listing/company_message_details.php');
  
  }
 
