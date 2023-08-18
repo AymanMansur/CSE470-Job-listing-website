@@ -18,6 +18,7 @@ if(isset($_POST['submit'])){
    $pass = mysqli_real_escape_string($conn, md5($_POST['password']));
    $cpass = mysqli_real_escape_string($conn, md5($_POST['cpassword']));
    $s_answer = mysqli_real_escape_string($conn, md5($_POST['security_answer']));
+   $nid_num = mysqli_real_escape_string($conn, md5($_POST['nid_number']));
    $user_jobtype = mysqli_real_escape_string($conn, $_POST['user_jobtype']);
    // $user_type = $_POST['Job Seeker'];
 
@@ -41,7 +42,7 @@ if(isset($_POST['submit'])){
       if($pass != $cpass){
          $message[] = 'confirm password not matched!';
       }else{
-         mysqli_query($conn, "INSERT INTO `job_seeker`(name, email, password, security_answer, picture, nid_picture, user_job_type) VALUES('$name', '$email', '$cpass','$s_answer', '$profile_image', '$nid_image', '$user_jobtype')") or die('query failed');
+         mysqli_query($conn, "INSERT INTO `job_seeker`(name, email, password, security_answer, nid_number, picture, nid_picture, user_job_type) VALUES('$name', '$email', '$cpass','$s_answer','$nid_num', '$profile_image', '$nid_image', '$user_jobtype')") or die('query failed');
          $message[] = 'registered successfully!';
          move_uploaded_file($profile_image_tmp_name, $profile_image_folder);
          move_uploaded_file($nid_image_tmp_name, $nid_image_folder);
@@ -93,7 +94,7 @@ if(isset($message)){
       <input type="email" name="email" placeholder="Enter Your Email" required class="box">
       <input type="password" name="password" placeholder="Enter Your Password" required class="box">
       <input type="password" name="cpassword" placeholder="Confirm Your Password" required class="box">
-      <!-- <input type="text" name="user_jobtype" placeholder="Enter Your Profession" required class="box"> -->
+      <input type="password" name="nid_number" placeholder="Enter Your NID number" required class="box">
       <p>Select Your Profession</p>
       <select name="user_jobtype"  class="box">
          <option value="Teacher">Teacher</option>
