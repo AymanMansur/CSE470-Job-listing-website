@@ -47,7 +47,7 @@ if(isset($_GET['company_id'])){
 
    <div class="content">
       <h3>Vacant Jobs</h3>
-      <a href="all_jobs.php" class="white-btn">
+      <!-- <a href="all_jobs.php" class="white-btn">
          <?php 
 
          $total_vacant = mysqli_query($conn, "SELECT COUNT(*) AS num_jobs
@@ -56,7 +56,7 @@ if(isset($_GET['company_id'])){
 
          echo mysqli_num_rows($total_vacant);
          ?>
-      </a>
+      </a> -->
    </div>
 
 </section>
@@ -69,7 +69,7 @@ if(isset($_GET['company_id'])){
       <?php  
          $select_jobs = mysqli_query($conn, "SELECT jobs_posted.job_title, company.name, jobs_posted.job_id
          FROM `jobs_posted`
-         INNER JOIN `company` ON jobs_posted.job_company_id = company.id
+         INNER JOIN `company` ON jobs_posted.job_company_id = company.id WHERE job_category='Teacher'
          LIMIT 3") or die('query failed');
          if(mysqli_num_rows($select_jobs) > 0){
             while($fetch_products = mysqli_fetch_assoc($select_jobs)){
