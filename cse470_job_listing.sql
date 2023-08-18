@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 18, 2023 at 06:23 PM
--- Server version: 10.4.25-MariaDB
--- PHP Version: 8.1.10
+-- Generation Time: Aug 18, 2023 at 09:14 PM
+-- Server version: 10.4.20-MariaDB
+-- PHP Version: 8.0.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `470`
+-- Database: `cse470_job_listing`
 --
 
 -- --------------------------------------------------------
@@ -73,7 +73,8 @@ INSERT INTO `company` (`id`, `name`, `email`, `password`, `company_logo`, `compa
 (1, 'Bkash Company', 'abid@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '9781506711980.jpg', 'Test Bkash Company', 'company', NULL, '2023-08-09 16:08:09', NULL),
 (2, 'alsolin', 'alsolin@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', NULL, NULL, 'company', NULL, '2023-07-28 23:29:54', NULL),
 (8, 'company', 'company@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', NULL, NULL, 'company', NULL, '2023-07-28 23:40:54', NULL),
-(9, 'sample1', 'sample1@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'protibadi app.PNG', NULL, 'company', NULL, '2023-08-08 18:24:49', NULL);
+(9, 'sample1', 'sample1@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'protibadi app.PNG', NULL, 'company', NULL, '2023-08-08 18:24:49', NULL),
+(10, 'nexgen', 'nexgen@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', '0.0.PNG', NULL, 'company', '2cb.PNG', '2023-08-18 19:02:40', NULL);
 
 -- --------------------------------------------------------
 
@@ -109,7 +110,8 @@ INSERT INTO `jobs_posted` (`job_id`, `job_title`, `job_company_id`, `job_details
 (8, 'Subway Manager', 2, 'Manager for sub way', 'Full Time', 'Manager', 20000, '2023-07-21', '2023-08-25', 'Pending', ''),
 (9, 'Bracu Teacher', 2, 'Teacher for Brac University', 'Full Time', 'Teacher', 98000, '2023-07-21', '2023-08-25', 'Pending', ''),
 (10, 'Bkash IT', 1, 'Bkash IT', 'Full Time', 'IT', 40000, '2023-07-21', '2023-08-25', 'Pending', NULL),
-(11, 'Bkash Sales Manager', 1, 'Sales Manager for Bkash', 'Full Time', 'Manager', 57777, '2023-07-21', '2023-08-25', 'Pending', NULL);
+(11, 'Bkash Sales Manager', 1, 'Sales Manager for Bkash', 'Full Time', 'Manager', 57777, '2023-07-21', '2023-08-25', 'Pending', NULL),
+(12, 'it specalist', 10, 'Knowledge about MERN stack', 'Full Time', 'IT', 20000, '2023-08-19', '2023-08-21', 'Pending', NULL);
 
 -- --------------------------------------------------------
 
@@ -146,14 +148,16 @@ CREATE TABLE `job_seeker` (
   `name` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
+  `user_job_type` varchar(100) NOT NULL,
   `picture` varchar(100) DEFAULT NULL,
   `portfolio` text DEFAULT NULL,
   `education_document` varchar(100) DEFAULT NULL,
   `security_answer` varchar(100) NOT NULL,
+  `nid_number` varchar(100) DEFAULT NULL,
   `nid_picture` varchar(100) DEFAULT NULL,
   `account_creation_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `bookmarked_company` varchar(100) DEFAULT NULL,
-  `account_type` varchar(100) NOT NULL,
+  `account_type` varchar(100) NOT NULL DEFAULT 'job_seeker',
   `always_null` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -161,10 +165,11 @@ CREATE TABLE `job_seeker` (
 -- Dumping data for table `job_seeker`
 --
 
-INSERT INTO `job_seeker` (`id`, `name`, `email`, `password`, `picture`, `portfolio`, `education_document`, `security_answer`, `nid_picture`, `account_creation_date`, `bookmarked_company`, `account_type`, `always_null`) VALUES
-(16, 'final test', 'finaltest@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Screenshot_20230420-154326.png', 'Now my portfolio is complete', NULL, 'c988fa7c33ce43962b9803702b747a35', 'Screenshot_20230420-164104.png', '2023-07-25 22:41:10', NULL, 'job_seeker', NULL),
-(17, 'final1', 'final@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '337159189_802999737339285_2911540560169458163_n.jpg', 'This is the portfolio for the user final1', NULL, 'c988fa7c33ce43962b9803702b747a35', '5.jpg', '2023-07-25 22:45:16', NULL, 'job_seeker', NULL),
-(19, 'admin', 'admin@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '', NULL, NULL, 'c988fa7c33ce43962b9803702b747a35', '', '2023-07-25 22:49:04', NULL, 'admin', NULL);
+INSERT INTO `job_seeker` (`id`, `name`, `email`, `password`, `user_job_type`, `picture`, `portfolio`, `education_document`, `security_answer`, `nid_number`, `nid_picture`, `account_creation_date`, `bookmarked_company`, `account_type`, `always_null`) VALUES
+(16, 'final test', 'finaltest@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '', 'Screenshot_20230420-154326.png', 'Now my portfolio is complete', NULL, 'c988fa7c33ce43962b9803702b747a35', NULL, 'Screenshot_20230420-164104.png', '2023-07-25 22:41:10', NULL, 'job_seeker', NULL),
+(17, 'final1', 'final@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '', '337159189_802999737339285_2911540560169458163_n.jpg', 'This is the portfolio for the user final1', NULL, 'c988fa7c33ce43962b9803702b747a35', NULL, '5.jpg', '2023-07-25 22:45:16', NULL, 'job_seeker', NULL),
+(19, 'admin', 'admin@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '', '', NULL, NULL, 'c988fa7c33ce43962b9803702b747a35', NULL, '', '2023-07-25 22:49:04', NULL, 'admin', NULL),
+(20, 'sakura', 'sakura@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', 'Teacher', '', NULL, NULL, 'd077f244def8a70e5ea758bd8352fcd8', '25f9e794323b453885f5181f1b624d0b', '', '2023-08-18 17:36:37', NULL, 'job_seeker', NULL);
 
 -- --------------------------------------------------------
 
@@ -202,7 +207,9 @@ INSERT INTO `message` (`message_id`, `message_sender_id`, `message_receiver_id`,
 (21, 8, 16, 'is this working\r\n', '2023-08-16 11:38:30'),
 (22, 16, 1, 'wrwer', '2023-08-16 11:39:33'),
 (23, 8, 17, 'eewrwer', '2023-08-16 11:40:57'),
-(24, 17, 19, 'Hey I wanted to contact you', '2023-08-16 11:44:59');
+(24, 17, 19, 'Hey I wanted to contact you', '2023-08-16 11:44:59'),
+(25, 19, 1, 'hi\r\n', '2023-08-18 19:07:18'),
+(26, 19, 1, 'hello', '2023-08-18 19:07:40');
 
 --
 -- Indexes for dumped tables
@@ -258,13 +265,13 @@ ALTER TABLE `bookmark`
 -- AUTO_INCREMENT for table `company`
 --
 ALTER TABLE `company`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `jobs_posted`
 --
 ALTER TABLE `jobs_posted`
-  MODIFY `job_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `job_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `job_application`
@@ -276,13 +283,13 @@ ALTER TABLE `job_application`
 -- AUTO_INCREMENT for table `job_seeker`
 --
 ALTER TABLE `job_seeker`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `message`
 --
 ALTER TABLE `message`
-  MODIFY `message_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `message_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
