@@ -18,7 +18,8 @@ if(isset($_POST['submit'])){
    $pass = mysqli_real_escape_string($conn, md5($_POST['password']));
    $cpass = mysqli_real_escape_string($conn, md5($_POST['cpassword']));
    $s_answer = mysqli_real_escape_string($conn, md5($_POST['security_answer']));
-   $user_type = $_POST['user_type'];
+   $user_jobtype = mysqli_real_escape_string($conn, $_POST['user_jobtype']);
+   // $user_type = $_POST['Job Seeker'];
 
    // This is for uploading profile picture
    $profile_image = $_FILES['profile_image']['name'];
@@ -40,7 +41,7 @@ if(isset($_POST['submit'])){
       if($pass != $cpass){
          $message[] = 'confirm password not matched!';
       }else{
-         mysqli_query($conn, "INSERT INTO `job_seeker`(name, email, password, security_answer, account_type, picture, nid_picture) VALUES('$name', '$email', '$cpass','$s_answer', '$user_type', '$profile_image', '$nid_image')") or die('query failed');
+         mysqli_query($conn, "INSERT INTO `job_seeker`(name, email, password, security_answer, picture, nid_picture, user_job_type) VALUES('$name', '$email', '$cpass','$s_answer', '$profile_image', '$nid_image', '$user_jobtype')") or die('query failed');
          $message[] = 'registered successfully!';
          move_uploaded_file($profile_image_tmp_name, $profile_image_folder);
          move_uploaded_file($nid_image_tmp_name, $nid_image_folder);
@@ -92,7 +93,22 @@ if(isset($message)){
       <input type="email" name="email" placeholder="Enter Your Email" required class="box">
       <input type="password" name="password" placeholder="Enter Your Password" required class="box">
       <input type="password" name="cpassword" placeholder="Confirm Your Password" required class="box">
-      
+      <!-- <input type="text" name="user_jobtype" placeholder="Enter Your Profession" required class="box"> -->
+      <p>Select Your Profession</p>
+      <select name="user_jobtype"  class="box">
+         <option value="Teacher">Teacher</option>
+         <option value="Engineer">Engineer</option>
+         <option value="IT">IT</option>
+         <option value="Marketing">Marketing</option>
+         <option value="Customer Service">Customer Service</option>
+         <option value="Medical">Medical</option>
+         <option value="Manager">Manager</option>
+         <option value="Data Entry">Data Entry</option>
+         <option value="Accounting">Accounting</option>
+         <option value="Bank">Bank</option>
+         <option value="NGO">NGO</option>
+         <option value="Other">Other</option>
+      </select>
       <p>Upload Your Profile Picture (Optional)</p>
       <input type="file" name="profile_image" accept="profile_image/jpg, profile_image/jpeg, profile_image/png" class="box">
       <p>Upload Your NID (Optional but 7 Days To Upload)</p>
@@ -100,11 +116,11 @@ if(isset($message)){
       
       <p>Who is the most important person to you?</p>
       <input type="text" name="security_answer" placeholder="Enter Security Answer" required class="box">
-      <p>User Type</p>
-      <select name="user_type" class="box">
+      <!-- <p>User Type</p> -->
+      <!-- <select name="user_type" class="box">
          <option value="job_seeker">Job Seeker</option>
          <option value="admin">Admin</option>
-      </select>
+      </select> -->
       <input type="submit" name="submit" value="register now" class="btn">
       <p>Already have an account? <a href="login.php">Login Now</a></p>
    </form>
