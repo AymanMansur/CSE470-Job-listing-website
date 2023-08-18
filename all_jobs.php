@@ -33,7 +33,9 @@ if(isset($_POST['job_sort_button'])){
    $_SESSION['job_sort'] = mysqli_real_escape_string($conn, $_POST['job_sort']);
    $_SESSION['job_category'] = mysqli_real_escape_string($conn, $_POST['category_buttons']);
 
+   // if ($job_type_select != 'test'){
    $_SESSION['job_type'] = mysqli_real_escape_string($conn, $_POST['job_type_select']);
+   
 
    $_SESSION['min_job_salary'] = mysqli_real_escape_string($conn, $_POST['min_job_salary']);
    $_SESSION['max_job_salary'] = mysqli_real_escape_string($conn, $_POST['max_job_salary']);
@@ -94,9 +96,11 @@ if(isset($_POST['job_sort_button'])){
             </select>
 
             <select name="job_type_select" class="box">
-               <option value="Both Time">Both Time</option>
+               <!-- <option value="test" disabled selected>Job Type</option> -->
+               
                <option value="Full Time">Full Time</option>
                <option value="Part Time">Part Time</option>
+               <option value="Both Time">Both Time</option>
             </select>
             <!-- This is for sort dropdown menu -->
             <select name="job_sort" class="box"> 
@@ -254,8 +258,13 @@ if(isset($_POST['job_sort_button'])){
             while($fetch_products = mysqli_fetch_assoc($select_job)){
             ?>
          <form action="" method="post" class="box">
-         <p> <span class="details" style="font-size: 19px; color: green;"><span><?php echo $fetch_products['job_creation_date']; ?></span> </p>
-            <div class="job_title"><a href="all_jobs.php?update=<?php echo $fetch_products['job_id']; ?>"><?php echo $fetch_products['job_title']; ?></a></div>
+         <p> <span class="details" style="font-size: 19px; color: green;"><span><?php echo $fetch_products['job_creation_date']; ?></span></p>
+   
+            
+            <div class="job_title">
+               <a href="all_jobs.php?update=<?php echo $fetch_products['job_id']; ?>"><?php echo $fetch_products['job_title']; ?></a></div>
+               
+            <div class="salary" style="font-size: 19px; color: green;"> Salary: <?php echo $fetch_products['job_salary']; ?> TK</div>
             <div class="company_name"><?php echo $fetch_products['name']; ?></div>
             <br>
 
